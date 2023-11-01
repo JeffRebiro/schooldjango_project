@@ -1,0 +1,95 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>{% block title %}StreetWise - Index{% endblock %}</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Inter:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'blog/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'blog/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'blog/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+    <link href="{% static 'blog/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+    <link href="{% static 'blog/aos/aos.css' %}" rel="stylesheet">
+
+    <!-- Template Main CSS Files -->
+    <link href="{% static 'blog/main.css' %}" rel="stylesheet">
+    <link href="{% static 'blog/variables.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="header" class="header d-flex align-items-center fixed-top">
+        <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+            <a href="{% url 'home' %}" class="logo d-flex align-items-center">
+                <h1>StreetWise</h1>
+            </a>
+
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'post-detail' post.id %}">Single Post</a></li>
+                    <li class="dropdown">Categories
+                        <a href="{% url 'category_posts' 1 'official-wear' %}">Official Wear</a>
+                        <a href="{% url 'category_posts' 2 'casual-wear' %}">Casual Wear</a>
+                        <a href="{% url 'category_posts' 3 'sneakers' %}">Sneakers</a>
+                        <a href="{% url 'category_posts' 4 'formal-shoes' %}">Formal Shoes</a>
+                    </li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                </ul>
+            </nav><!-- .navbar -->
+
+            <div class="social-icons">
+                <a href="#" class="mx-2"><span class="bi-facebook"></span></a>
+                <a href="#" class="mx-2"><span class="bi-twitter"></span></a>
+                <a href="#" class="mx-2"><span class="bi-instagram"></span></a>
+            </div>
+
+            <div class="search-mobile">
+                <a href="#" class="mx-2 js-search-open"><span class="bi-search"></span></a>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </div>
+        </div>
+    </header><!-- End Header -->
+
+    <!-- Content Block -->
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+    <!-- End Content Block -->
+
+    <!-- Footer -->
+    <footer id="footer" class="footer">
+        <!-- Your footer content goes here -->
+    </footer>
+
+    <script src="{% static 'blog/bootstrap/js/main.js' %}"></script>
+    <script src="{% static 'blog/swiper/swiper-bundle.min.js' %}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var slider = new Swiper(".sliderFeaturedPosts", {
+                slidesPerView: 1,
+                spaceBetween: 10,
+                navigation: {
+                    nextEl: ".custom-swiper-button-next",
+                    prevEl: ".custom-swiper-button-prev",
+                },
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                },
+            });
+        });
+    </script>
+
+    <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+</body>
+</html>

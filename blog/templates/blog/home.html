@@ -1,0 +1,97 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <main id="main">
+        <!-- Hero Slider Section -->
+        <section id="hero-slider" class="hero-slider">
+            <div class="container-md" data-aos="fade-in">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="swiper-container sliderFeaturedPosts">
+                            <div class="swiper-wrapper">
+                                {% for post in posts %}
+                                    <div class="swiper-slide">
+                                        <a href="{% url 'post-detail' post.id %}" class="img-bg d-flex align-items-end" style="background-image: url('{{ post.image.url }}');">
+                                            <div class="img-bg-inner">
+                                                <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+                                            </div>
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="custom-swiper-button-next">
+                                <span class="bi-chevron-right"></span>
+                            </div>
+                            <div class="custom-swiper-button-prev">
+                                <span class="bi-chevron-left"></span>
+                            </div>
+                            <div class="swiper-pagination"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Hero Slider Section -->
+
+        <!-- Post Grid Section -->
+        <section id="posts" class="posts">
+            <div class="container" data-aos="fade-up">
+                <div class="row g-5">
+                    <div class="col-lg-4">
+                        {% for post in posts %}
+                            <div class="post-entry-1 lg">
+                                <a href="{% url 'post-detail' post.id %}"><img src="{{ post.image.url }}" alt="{{ post.title }}" class="img-fluid"></a>
+                                <div class="post-meta">
+                                    <span class="date">{{ post.category }}</span>
+                                    <span class="mx-1">&bullet;</span>
+                                    <span>{{ post.date_posted|date:"F d, Y" }}</span>
+                                </div>
+                                <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="col-lg-8">
+                        <div class="row g-5">
+                            <div class="col-lg-4 border-start custom-border">
+                                {% for post in posts %}
+                                    <div class="post-entry-1">
+                                        <a href="{% url 'post-detail' post.id %}"><img src="{{ post.image.url }}" alt="{{ post.title }}" class="img-fluid"></a>
+                                        <div class="post-meta">
+                                            <span class="date">{{ post.category }}</span>
+                                            <span class="mx-1">&bullet;</span>
+                                            <span>{{ post.date_posted|date:"F d, Y" }}</span>
+                                        </div>
+                                        <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                            <!-- Trending Section -->
+                            <div class="col-lg-4">
+                                <div class="trending">
+                                    <h3>Trending</h3>
+                                    <ul class="trending-post">
+                                        {% for post in posts %}
+                                            <li>
+                                                <a href="{% url 'post-detail' post.id %}">
+                                                    <span class="number">1</span>
+                                                    <h3><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h3>
+                                                    <span class="author">
+                                                        <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div> <!-- End Trending Section -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Post Grid Section -->
+    </main>
+{% endblock content %}
+

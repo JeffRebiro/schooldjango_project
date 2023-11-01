@@ -1,0 +1,200 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+<article class="media content-section">
+  <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}" alt=" ">
+  <div class="media-body">
+      <div class="article-metadata">
+          <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
+          <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+          {% if post.author == user %}
+              <div>
+              <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' post.id %}">Update</a>
+               <a class= "btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' post.id %}">Delete</a>
+              </div>
+          {% endif %}
+      </div>
+  </div>
+</article>
+<main id="main">
+
+    <section class = "single-post-content">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9 post-content" data-aos="fade-up">
+
+            <!-- ======= Single Post Content ======= -->
+            <div class="single-post">
+              <div class="post-meta"><span class="date">{{ post.category }}</span> <span class="mx-1">&bullet;</span> <span>{{ post.date_posted|date:"F d, Y" }}</span></div>
+              <h1 class="mb-5">{{ post.title }}</h1>
+              <p><span class="firstcharacter">{{ post.content }}</span>{{ post.content }}</p>
+
+              <figure class="my-4">
+                <img src="{{ post.post_image.url }}" alt="" class="img-fluid">
+                <figcaption>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, odit? </figcaption>
+              </figure>
+              <p>{{ post.content }}</p>
+              <figure class="my-4">
+                <img src="{{ post.post_image.url }}" alt="" class="img-fluid">
+                <figcaption>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, odit? </figcaption>
+              </figure>
+              <p>{{ post.content }}</p>
+            </div><!-- End Single Post Content -->
+
+            <!-- ======= Comments ======= -->
+            <div class="comments">
+              <h5 class="comment-title py-4">2 Comments</h5>
+              <div class="comment d-flex mb-4">
+                <div class="flex-shrink-0">
+                  <div class="avatar avatar-sm rounded-circle">
+                    <img class="avatar-img img-fluid" src="{{ post.author.profile.image.url }}" alt="">
+                  </div>
+                </div>
+                <div class="flex-grow-1 ms-2 ms-sm-3">
+                  <div class="comment-meta d-flex align-items-baseline">
+                    <h6 class="me-2">Jordan Singer</h6>
+                    <span class="text-muted">2d</span>
+                  </div>
+                  <div class="comment-body">
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non minima ipsum at amet doloremque qui magni, placeat deserunt pariatur itaque laudantium impedit aliquam eligendi repellendus excepturi quibusdam nobis esse accusantium.
+                  </div>
+
+                  <div class="comment-replies bg-light p-3 mt-3 rounded">
+                    <h6 class="comment-replies-title mb-4 text-muted text-uppercase">2 replies</h6>
+
+                    <div class="reply d-flex mb-4">
+                      <div class="flex-shrink-0">
+                        <div class="avatar avatar-sm rounded-circle">
+                          <img class="avatar-img img-fluid" src="{{ post.author.profile.image.url }}" alt="">
+                        </div>
+                      </div>
+                      <div class="flex-grow-1 ms-2 ms-sm-3">
+                        <div class="reply-meta d-flex align-items-baseline">
+                          <h6 class="mb-0 me-2">Brandon Smith</h6>
+                          <span class="text-muted">2d</span>
+                        </div>
+                        <div class="reply-body">
+                          Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="reply d-flex">
+                      <div class="flex-shrink-0">
+                        <div class="avatar avatar-sm rounded-circle">
+                          <img class="avatar-img img-fluid" src="{{ post.author.profile.image.url }}" alt=" ">
+                        </div>
+                      </div>
+                      <div class="flex-grow-1 ms-2 ms-sm-3">
+                        <div class = "reply-meta d-flex align-items-baseline">
+                          <h6 class="mb-0 me-2">James Parsons</h6>
+                          <span class="text-muted">1d</span>
+                        </div>
+                        <div class="reply-body">
+                          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio dolore sed eos sapiente, praesentium.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="comment d-flex">
+                <div class="flex-shrink-0">
+                  <div class="avatar avatar-sm rounded-circle">
+                    <img class="avatar-img img-fluid" src="{{ post.author.profile.image.url }}" alt="">
+                  </div>
+                </div>
+                <div class="flex-shrink-1 ms-2 ms-sm-3">
+                  <div class="comment-meta d-flex">
+                    <h6 class="me-2">Santiago Roberts</h6>
+                    <span class="text-muted">4d</span>
+                  </div>
+                  <div class="comment-body">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto laborum in corrupti dolorum, quas delectus nobis porro accusantium molestias sequi.
+                  </div>
+                </div>
+              </div>
+            </div><!-- End Comments -->
+
+            <!-- ======= Comments Form ======= -->
+            <div class="row justify-content-center mt-5">
+
+              <div class="col-lg-12">
+                <h5 class="comment-title">Leave a Comment</h5>
+                <div class="row">
+                  <div class="col-lg-6 mb-3">
+                    <label for = "comment-name">Name</label>
+                    <input type="text" class="form-control" id="comment-name" placeholder="Enter your name">
+                  </div>
+                  <div class="col-lg-6 mb-3">
+                    <label for="comment-email">Email</label>
+                    <input type="text" class="form-control" id="comment-email" placeholder="Enter your email">
+                  </div>
+                  <div class="col-12 mb-3">
+                    <label for="comment-message">Message</label>
+
+                    <textarea class="form-control" id="comment-message" placeholder="Enter your name" cols="30" rows="10"></textarea>
+                  </div>
+                  <div class="col-12">
+                    <input type="submit" class="btn btn-primary" value="Post comment">
+                  </div>
+                </div>
+              </div>
+            </div><!-- End Comments Form -->
+
+          </div>
+          <div class="col-md-3">
+            <!-- ======= Sidebar ======= -->
+            <div class="aside-block">
+
+              <ul class="nav nav-pills custom-tab-nav mb-4" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="pills-trending-tab" data-bs-toggle="pill" data-bs-target="#pills-trending" type="button" role="tab" aria-controls="pills-trending" aria-selected="false">Trending</button>
+                </li>
+              </ul>
+
+              <div class="tab-content" id="pills-tabContent">
+
+              <!-- Trending Section -->
+              <div class="col-lg-4">
+
+                <div class="trending">
+                  <h3>Trending</h3>
+                  <ul class="trending-post">
+                    {% for post in posts %}
+                    <li>
+                        <span class="number">1</span>
+                        <h3><a class="article-title" href="{%  url 'post-detail' post.id %}">{{ post.title }}</a></h3>
+                        <span class="author"><a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a></span>
+                    </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+
+              </div> <!-- End Trending Section -->
+
+              </div>
+            </div>
+          <!--Video-->
+            <div class="aside-block">
+              <h3 class="aside-title">Video</h3>
+              <div class="video-post">
+                <a href="https://www.youtube.com/watch?v=AiFfDjmd0jU" class="glightbox link-video">
+                  <span class="bi-play-fill"></span>
+                  <img src="{{ post.post_image.url }}" alt="" class="img-fluid">
+                </a>
+              </div>
+            </div><!-- End Video -->
+
+            <div class="aside-block">
+              <h3 class="aside-title">Categories</h3>
+              <ul class="aside-links list-unstyled">
+                {% for post in posts %}
+                <li><a href="{%  url 'post-category' post.id %}"><i class="bi bi-chevron-right"></i> {{ post.category }}</a></li>
+                {% endfor %}
+              </ul>
+            </div><!-- End Categories -->
+          </div>
+        </div>
+      </div>
+    </section>
+  </main><!-- End #main -->
+{% endblock content %}
