@@ -1,46 +1,42 @@
 {% extends 'blog/base.html' %}
-{% block content %}
+ {% block content %}
 <main id="main">
   <section>
     <div class="container">
       <div class="row">
-
         <div class="col-md-9" data-aos="fade-up">
-          <h3 class="category-title">{{ category.slug }}</h3>  {# Display the category's slug #}
-
-          {% for post in category_posts %}  {# Use a variable to represent the posts in the category #}
-          <div class="d-md-flex post-entry-2 half">
-            <a href="{% url 'post-detail' post.id %}" class="me-4 thumbnail">
-              <img src="{{ post.image.url }}" alt="{{ post.title }}" class="img-fluid">
+          <h3 class="category-title">{{ category.slug }}</h3>
+           {% for post in posts %}
+          <div class="d-md-flex post-entry-2">
+            <a href="{{ post.url }}" class="me-4 thumbnail">
+              <img src="{{ post.image.thumbnail.url }}" alt="{{ post.title }}" class="img-fluid">
             </a>
             <div>
               <div class="post-meta">
-                <span class="date">{{ post.date_posted|date:"F d, Y" }}</span>
+                <span class="date">{{ post.formatted_date }}</span>
               </div>
-              <h3><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h3>
+              <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
               <p>{{ post.content }}</p>
               <div class="d-flex align-items-center author">
-                <div class="photo"><img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}" alt=""></div>
-                <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
+                <div class="photo">
+                  <img class="rounded-circle article-img" src="{{ post.author.profile.thumbnail.url }}" alt="">
+                </div>
+                <a class="mr-2" href="{{ post.author.url }}">{{ post.author }}</a>
               </div>
             </div>
           </div>
           {% endfor %}
-
-          <div class="text-start py-4">
+           <div class="text-start py-4">
             <div class="custom-pagination">
-              <a href="#" class="prev">Previous</a>
-              <a href="#" class="active">1</a>
-              <a href="#">2</a>
-              <a href="#">3</a>
-              <a href="#">4</a>
-              <a href="#">5</a>
-              <a href="#" class="next">Next</a>
+              <a href="{{ previous_page_url }}" class="prev">Previous</a>
+              {% for page in pages %}
+              <a href="{{ page.url }}" {% if page.is_current %}class="active"{% endif %}>{{ page.number }}</a>
+              {% endfor %}
+              <a href="{{ next_page_url }}" class="next">Next</a>
             </div>
           </div>
         </div>
-
-        <div class="col-md-3">
+         <div class="col-md-3">
           <!-- Sidebar content here -->
         </div>
       </div>

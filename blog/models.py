@@ -32,17 +32,15 @@ class Post(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-
         img = Image.open(self.post_image.path)
-
         if img.height > 900 or img.width > 900:
             output_size = (900, 900)
             img.thumbnail(output_size)
             img.save(self.post_image.path)
 
-    def get_absolute_url(self):
-        return reverse('post-detail', kwargs={'pk': self.pk})
 
+def get_absolute_url(self):
+    return reverse('post-detail', kwargs={'pk': self.pk})
 
 class BlogCategory(models.Model):
     name = models.CharField(max_length=100)

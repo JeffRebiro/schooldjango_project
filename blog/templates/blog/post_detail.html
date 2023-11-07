@@ -1,7 +1,7 @@
 {% extends 'blog/base.html' %}
 {% block content %}
 <article class="media content-section">
-  <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}" alt=" ">
+  <img class="rounded-circle article-img" src="{{ post.post_image.url }}" alt=" ">
   <div class="media-body">
       <div class="article-metadata">
           <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
@@ -22,31 +22,13 @@
         <div class="row">
           <div class="col-md-9 post-content" data-aos="fade-up">
 
-            <!-- ======= Single Post Content ======= -->
-            <div class="single-post">
-              <div class="post-meta"><span class="date">{{ post.category }}</span> <span class="mx-1">&bullet;</span> <span>{{ post.date_posted|date:"F d, Y" }}</span></div>
-              <h1 class="mb-5">{{ post.title }}</h1>
-              <p><span class="firstcharacter">{{ post.content }}</span>{{ post.content }}</p>
-
-              <figure class="my-4">
-                <img src="{{ post.post_image.url }}" alt="" class="img-fluid">
-                <figcaption>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, odit? </figcaption>
-              </figure>
-              <p>{{ post.content }}</p>
-              <figure class="my-4">
-                <img src="{{ post.post_image.url }}" alt="" class="img-fluid">
-                <figcaption>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, odit? </figcaption>
-              </figure>
-              <p>{{ post.content }}</p>
-            </div><!-- End Single Post Content -->
-
             <!-- ======= Comments ======= -->
             <div class="comments">
               <h5 class="comment-title py-4">2 Comments</h5>
               <div class="comment d-flex mb-4">
                 <div class="flex-shrink-0">
                   <div class="avatar avatar-sm rounded-circle">
-                    <img class="avatar-img img-fluid" src="{{ post.author.profile.image.url }}" alt="">
+                    <img class="avatar-img img-fluid" src="assests/img/person-5.jpg" alt="">
                   </div>
                 </div>
                 <div class="flex-grow-1 ms-2 ms-sm-3">
@@ -64,7 +46,7 @@
                     <div class="reply d-flex mb-4">
                       <div class="flex-shrink-0">
                         <div class="avatar avatar-sm rounded-circle">
-                          <img class="avatar-img img-fluid" src="{{ post.author.profile.image.url }}" alt="">
+                          <img class="avatar-img img-fluid" src="assests/img/person-4.jpg" alt="">
                         </div>
                       </div>
                       <div class="flex-grow-1 ms-2 ms-sm-3">
@@ -80,7 +62,7 @@
                     <div class="reply d-flex">
                       <div class="flex-shrink-0">
                         <div class="avatar avatar-sm rounded-circle">
-                          <img class="avatar-img img-fluid" src="{{ post.author.profile.image.url }}" alt=" ">
+                          <img class="avatar-img img-fluid" src="assests/img/person-3.jpg" alt=" ">
                         </div>
                       </div>
                       <div class="flex-grow-1 ms-2 ms-sm-3">
@@ -99,7 +81,7 @@
               <div class="comment d-flex">
                 <div class="flex-shrink-0">
                   <div class="avatar avatar-sm rounded-circle">
-                    <img class="avatar-img img-fluid" src="{{ post.author.profile.image.url }}" alt="">
+                    <img class="avatar-img img-fluid" src="assests/img/person-2.jpg" alt="">
                   </div>
                 </div>
                 <div class="flex-shrink-1 ms-2 ms-sm-3">
@@ -154,9 +136,8 @@
               <div class="tab-content" id="pills-tabContent">
 
               <!-- Trending Section -->
-              <div class="col-lg-4">
-
-                <div class="trending">
+              <div class="tab-pane fade" id="pills-trending" role="tabpanel" aria-labelledby="pills-trending-tab">
+                <div class="post-entry-1 border-bottom">
                   <h3>Trending</h3>
                   <ul class="trending-post">
                     {% for post in posts %}
@@ -179,7 +160,7 @@
               <div class="video-post">
                 <a href="https://www.youtube.com/watch?v=AiFfDjmd0jU" class="glightbox link-video">
                   <span class="bi-play-fill"></span>
-                  <img src="{{ post.post_image.url }}" alt="" class="img-fluid">
+                  <img src="assests/img/post-landscape-5.jpg" alt="" class="img-fluid">
                 </a>
               </div>
             </div><!-- End Video -->
